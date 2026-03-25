@@ -1,5 +1,5 @@
 ## Question 1:-
-Insert Parent and Child in One DML Statement 
+Insert Parent and Child in One DML Statement using External ID
 ```
 public class AccountContactcreate {
     public static void mymethod(){
@@ -20,3 +20,34 @@ public class AccountContactcreate {
     }
 }
 ```
+
+## Question 2
+create function to delete the dublicate records 
+
+```
+List<Contact> conList = [SELECT Name FROM Contact];
+Map<String, ID> mMap = new Map<String, ID>();
+for(Contact c: conList)
+{
+	mMap.put(c.Name, c.Id);
+}
+List<Contact> delList = new List<Contact>();
+Set<String> sSet = mMap.keySet();
+Set<ID> uniqSet = new Set<ID>();
+for(String s: sSet)
+{
+	uniqSet.add(mMap.get(s));
+}
+for(Contact c1: conList)
+{
+	if(!uniqSet.contains(c1.Id))
+		delList.add(c1);
+		
+}
+delete delList;
+
+```
+
+## Question 3
+
+
