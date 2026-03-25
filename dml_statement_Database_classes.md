@@ -75,3 +75,29 @@ Bulk Lead Conversion whose name start with a
         Database.leadConvertResult[] leadcresult=DataBase.convertLead(needtoConvert);
     }
 ```
+
+## Question 4 
+Transaction control and rollback 
+```
+public class AccountCreateHelper {
+    public static void createAccount(){
+        savepoint sp=database.setsavepoint();
+        
+        try{
+            List<Account>accList=new List<Account>();
+            Account acc=new Account(Name='Sanjay Singh', Ext_ID__c='TTT17278');
+            accList.add(acc);
+            List<Contact>conlist=new list<Contact>();
+            for(Account acc1:accList){
+                Contact con1=new Contact(AccountId=acc1.id, FirstName='Ravi');
+                Contact con2=new Contact(AccountId=acc1.id, FirstName='Ajay');
+                conlist.add(con1);
+                conlist.add(con2);
+            }
+            Database.saveResult[] sv=Database.insert(conlist);
+        }catch(Exception e){
+            Database.rollback(sp);
+        }
+    }
+}
+```
