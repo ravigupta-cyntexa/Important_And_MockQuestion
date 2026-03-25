@@ -1,6 +1,6 @@
 ## Question 1:-
 Insert Parent and Child in One DML Statement using External ID
-   -- > First Make a custom field and tick as External ID 
+   -- > First Make a custom field on Account (Parent) and tick as External ID 
 ```
 public class AccountContactcreate {
     public static void mymethod(){
