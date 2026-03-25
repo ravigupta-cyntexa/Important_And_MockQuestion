@@ -50,4 +50,28 @@ delete delList;
 
 ## Question 3
 
+Bulk Lead Conversion whose name start with a
 
+```
+   public static void LeadConversion(){
+          List<Lead> leadList=[select name from Lead where name like 'sh%' ];
+          List<Database.leadConvert>needtoConvert=new List<Database.leadConvert>();
+          try{
+              for(Lead le:leadList){
+              Database.leadConvert lc=new Database.leadConvert();
+              lc.setLeadId(le.id);
+              LeadStatus convertStatus = [SELECT Id, ApiName FROM LeadStatus WHERE IsConverted=true LIMIT 1];
+              lc.setConvertedStatus(convertStatus.ApiName);
+              lc.setOwnerId(UserInfo.getUserId());
+              needtoConvert.add(lc);
+                  
+              }
+              
+          }catch(Exception e){
+              System.debug(e.getMessage());
+          }
+          
+        
+        Database.leadConvertResult[] leadcresult=DataBase.convertLead(needtoConvert);
+    }
+```
